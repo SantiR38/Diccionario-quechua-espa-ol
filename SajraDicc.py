@@ -37,12 +37,17 @@ def buscarPalabra():
         resultado.insert(1.0, "Por favor, elige un diccionario.")
 
 
+# -----------------------------------Variables-----------------------------------------------
+
+color_fondo = "#FFF6C7"
+color_cuadro_texto = "#D9C8A9"
+
 # ----------------------------------- Interfaz ----------------------------------------------
 
 raiz = Tk()
-raiz.title("Programa para la reunion en quechua")
-raiz.iconbitmap("llama.ico")
-raiz.config(bg="grey")
+raiz.title("Diccionario Quechua-Español")
+raiz.iconbitmap("llama2.ico")
+raiz.config(bg=color_fondo)
 
 # ----------------------------------Barra de Menú-----------------------------------------
 
@@ -64,42 +69,44 @@ barraMenu.add_cascade(label="Ayuda", menu=ayudaMenu)
 
 frameTitulo = Frame()
 frameTitulo.pack()
-frameTitulo.config(bg="grey", width="850", height="350", bd=35)
+frameTitulo.config(bg=color_fondo, width="850", height="350", bd=35)
 
 titulo = Label(frameTitulo, text="Diccionario Quechua - Español")
 titulo.grid(row=0, column=0, columnspan=2, padx=5, pady=10)
-titulo.config(font=('bold', 20))
+titulo.config(font=('bold', 20), bg=color_fondo)
 
 varOption = IntVar()
-opcion_esp_qu = Radiobutton(frameTitulo, text ="Español - Quechua", variable=varOption, value=1)
+opcion_esp_qu = Radiobutton(frameTitulo, text="Español - Quechua", variable=varOption, value=1)
 opcion_esp_qu.grid(row=1, column=0)
-opcion_qu_esp = Radiobutton(frameTitulo, text ="Quechua - Español", variable=varOption, value=2)
+opcion_esp_qu.config(bg=color_fondo)
+opcion_qu_esp = Radiobutton(frameTitulo, text="Quechua - Español", variable=varOption, value=2)
 opcion_qu_esp.grid(row=1, column=1)
+opcion_qu_esp.config(bg=color_fondo)
 
 # ------------------------------Frame para el contenido-----------------------------------------
 
 frameContenido = Frame()
 frameContenido.pack()
-frameContenido.config(bg="grey", width="850", height="350", bd=20)
+frameContenido.config(bg=color_fondo, width="850", height="350", bd=20)
 
 miBusqueda = StringVar()
 busquedaLabel = Label(frameContenido, text="Busqueda: ")
 busquedaLabel.grid(row=0, column=0, sticky="e", padx=1)
+busquedaLabel.config(bg=color_fondo)
 cuadroTexto1 = Entry(frameContenido, textvariable=miBusqueda)
-cuadroTexto1.grid(row=0, column=1)
-cuadroTexto1.config(fg="red", justify="center")
+cuadroTexto1.grid(row=0, column=1, columnspan=2)
+cuadroTexto1.config(fg="#261201", justify="center", bg=color_cuadro_texto)
 
-#--------------------------------------Botón----------------------------------------------
+# --------------------------------------Botón----------------------------------------------
 calcularBoton = Button(frameContenido, text="Buscar", command=buscarPalabra)
-calcularBoton.grid(row=1, column=0, padx=5, pady=10, columnspan=2)
+calcularBoton.grid(row=1, column=0, padx=5, pady=10, columnspan=3)
 
 # resultado = Label(frameContenido)
 # resultado. grid(row=7, column=0, padx=5, pady=10, columnspan=4)
 # resultado.config(width="50", height="5")
 
 resultado = Text(frameContenido, width=40, height=12)
-resultado.grid(row=3, column=0, sticky="e", padx=10, pady=10, columnspan=2)
-
+resultado.grid(row=3, column=0, sticky="e", padx=10, pady=10, columnspan=3)
+resultado.config(bg=color_cuadro_texto)
 
 raiz.mainloop()
-
