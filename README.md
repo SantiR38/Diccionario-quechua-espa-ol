@@ -1,4 +1,4 @@
-# Diccionario-quechua-espa-ol
+# Diccionario-quechua-espaniol
 Diccionario bilingüe, español - quechua boliviano y viceversa.
 
 Es una aplicación todavía en desarrollo.
