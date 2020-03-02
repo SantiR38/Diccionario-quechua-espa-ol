@@ -78,7 +78,7 @@ frameTitulo.pack()
 frameTitulo.config(bg=color_fondo, width="850", height="350", bd=35)
 
 titulo = Label(frameTitulo, text="Diccionario Quechua - Español")
-titulo.grid(row=0, column=0, columnspan=2, padx=5, pady=10)
+titulo.grid(row=0, column=0, columnspan=2, padx=5, pady=5)
 titulo.config(font=('bold', 20), bg=color_fondo)
 
 # ---------------------------Botones para cambiar de diccionario-----------------------------
@@ -100,24 +100,25 @@ frameContenido.config(bg=color_fondo, width="850", height="350", bd=20)
 # -----------------Sección donde se coloca la palabra que se quiere buscar-------------------
 
 miBusqueda = StringVar()
-busquedaLabel = Label(frameContenido, text="Busqueda: ")
-busquedaLabel.grid(row=0, column=0, sticky="e", padx=1)
-busquedaLabel.config(bg=color_fondo)
 
-cuadroTexto1 = Entry(frameContenido, textvariable=miBusqueda)
-cuadroTexto1.grid(row=0, column=1, columnspan=2)
-cuadroTexto1.config(fg="#261201", justify="center", bg=color_cuadro_texto)
+cuadroTexto1 = Entry(frameContenido, textvariable=miBusqueda, width=35)
+cuadroTexto1.grid(row=0, column=0, columnspan=4)
+cuadroTexto1.config(fg="#261201", bg=color_cuadro_texto)
 #  Esto es para que cuando se apreta 'enter', se ejecute la misma función que con el botón 'buscar'
 cuadroTexto1.bind('<Return>', buscarPalabra)
 
 # --------------------------------------Botón----------------------------------------------
+
+img = PhotoImage(file='buscar.png')
+
 # El parámetro de relleno de la siguiente línea es explicado en la documentacion de la función buscarPalabra()
-calcularBoton = Button(frameContenido, text="Buscar", command=lambda: buscarPalabra("parametro_de_relleno"))
-calcularBoton.grid(row=1, column=0, padx=5, pady=10, columnspan=3)
+calcularBoton = Button(frameContenido, image=img, command=lambda: buscarPalabra("parametro_de_relleno"))
+calcularBoton.grid(row=0, column=4, padx=5, pady=10, sticky="w")
+calcularBoton.config(bg=color_fondo, relief="flat")
 
 # -----------------Cuadro donde se muestra el resultado de la búsqueda---------------------
 resultado = Text(frameContenido, width=40, height=12)
-resultado.grid(row=3, column=0, sticky="e", padx=10, pady=10, columnspan=3)
+resultado.grid(row=1, column=0, padx=10, pady=10, columnspan=5)
 resultado.config(bg=color_cuadro_texto)
 
 raiz.mainloop()
