@@ -24,7 +24,8 @@ def buscarPalabra(event):
                 resultado.insert(1.0, "Por favor, escribe una palabra...")
         except KeyError:
             resultado.delete(1.0, END)
-            resultado.insert(1.0, "No hay resultado para la palabra que buscas...")
+            resultado.insert(1.0, "No hay resultado para la palabra que buscas. Por favor, asegurate de"
+                                  " no haber escrito con errores ortográficos...")
     elif varOption.get() == 2:
         try:
             palabraBuscada = (miBusqueda.get()).lower()
@@ -37,7 +38,8 @@ def buscarPalabra(event):
                 resultado.insert(1.0, "Por favor, escribe una palabra...")
         except KeyError:
             resultado.delete(1.0, END)
-            resultado.insert(1.0, "No hay resultado para la palabra que buscas...")
+            resultado.insert(1.0, "No hay resultado para la palabra que buscas. Por favor, asegurate de "
+                                  "no haber escrito con errores ortográficos...")
     else:
         resultado.delete(1.0, END)
         resultado.insert(1.0, "Por favor, elige un diccionario.")
@@ -51,7 +53,7 @@ color_cuadro_texto = "#D9C8A9"
 # ----------------------------------- Interfaz ----------------------------------------------
 
 raiz = Tk()
-raiz.title("Diccionario Quechua-Español")
+raiz.title("SajraDicc")
 raiz.iconbitmap("llama2.ico")
 raiz.config(bg=color_fondo)
 
@@ -77,10 +79,12 @@ frameTitulo = Frame()
 frameTitulo.pack()
 frameTitulo.config(bg=color_fondo, width="850", height="350", bd=35)
 
-titulo = Label(frameTitulo, text="Diccionario Quechua - Español")
-titulo.grid(row=0, column=0, columnspan=2, padx=5, pady=5)
+titulo = Label(frameTitulo, text="SajraDicc")
+titulo.grid(row=0, column=0, padx=5, pady=5)
 titulo.config(font=('bold', 20), bg=color_fondo)
-
+# img_portada = PhotoImage(file="llama2.ico")
+# frameChico = Frame(frameTitulo, img=img_portada)
+# frameChico.grid(row=0, column=1, padx=5, pady=5)
 # ---------------------------Botones para cambiar de diccionario-----------------------------
 
 varOption = IntVar()
@@ -119,6 +123,6 @@ calcularBoton.config(bg=color_fondo, relief="flat")
 # -----------------Cuadro donde se muestra el resultado de la búsqueda---------------------
 resultado = Text(frameContenido, width=40, height=12)
 resultado.grid(row=1, column=0, padx=10, pady=10, columnspan=5)
-resultado.config(bg=color_cuadro_texto)
+resultado.config(bg=color_cuadro_texto, font="comic")
 
 raiz.mainloop()
