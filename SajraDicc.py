@@ -48,7 +48,7 @@ def buscarPalabra(event):
 # -----------------------------------Variables-----------------------------------------------
 
 color_fondo = "#FFF6C7"
-color_cuadro_texto = "#D9C8A9"
+color_cuadro_texto = "#E4CFB0"
 
 # ----------------------------------- Interfaz ----------------------------------------------
 
@@ -56,6 +56,7 @@ raiz = Tk()
 raiz.title("SajraDicc")
 raiz.iconbitmap("llama2.ico")
 raiz.config(bg=color_fondo)
+raiz.resizable(0,0)
 
 # ----------------------------------Barra de Menú-----------------------------------------
 
@@ -77,9 +78,24 @@ barraMenu.add_cascade(label="Ayuda", menu=ayudaMenu)
 
 frameTitulo = Frame()
 frameTitulo.pack()
-frameTitulo.config(bg=color_fondo, width="850", height="350", bd=35)
+frameTitulo.config(bg=color_fondo, width="850", height="350", bd=15)
 
-titulo = Label(frameTitulo, text="SajraDicc")
+#Frame Imagen
+frameImagen = Frame(frameTitulo)
+frameImagen.grid(row=0, column=0, rowspan=2)
+frameImagen.config(bg=color_fondo)
+
+llamita = PhotoImage(file="llama3.png")
+vista_llamita = Label(frameImagen, image=llamita)
+vista_llamita.grid(row=0, column=0)
+vista_llamita.config(bg=color_fondo)
+
+#Frame Texto
+frameTexto = Frame(frameTitulo)
+frameTexto.grid(row=0, column=1)
+frameTexto.config(bg=color_fondo)
+
+titulo = Label(frameTexto, text="SajraDicc")
 titulo.grid(row=0, column=0, padx=5, pady=5)
 titulo.config(font=('bold', 20), bg=color_fondo)
 # img_portada = PhotoImage(file="llama2.ico")
@@ -88,10 +104,10 @@ titulo.config(font=('bold', 20), bg=color_fondo)
 # ---------------------------Botones para cambiar de diccionario-----------------------------
 
 varOption = IntVar()
-opcion_esp_qu = Radiobutton(frameTitulo, text="Español - Quechua", variable=varOption, value=1)
+opcion_esp_qu = Radiobutton(frameTexto, text="Español - Quechua", variable=varOption, value=1)
 opcion_esp_qu.grid(row=1, column=0)
 opcion_esp_qu.config(bg=color_fondo)
-opcion_qu_esp = Radiobutton(frameTitulo, text="Quechua - Español", variable=varOption, value=2)
+opcion_qu_esp = Radiobutton(frameTexto, text="Quechua - Español", variable=varOption, value=2)
 opcion_qu_esp.grid(row=1, column=1)
 opcion_qu_esp.config(bg=color_fondo)
 
@@ -123,6 +139,6 @@ calcularBoton.config(bg=color_fondo, relief="flat")
 # -----------------Cuadro donde se muestra el resultado de la búsqueda---------------------
 resultado = Text(frameContenido, width=40, height=12)
 resultado.grid(row=1, column=0, padx=10, pady=10, columnspan=5)
-resultado.config(bg=color_cuadro_texto, font="comic")
+resultado.config(bg=color_cuadro_texto, font="comic", wrap=WORD) # wrap=WORD es para que haga los saltos de línea sin cortar una palabra por la mitad
 
 raiz.mainloop()
