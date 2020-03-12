@@ -13,37 +13,19 @@ def buscarPalabra(event):
     :return: La funcion no devuelve ningun valor, sino mas bien, rellena el widge Text() con la definicion y traducción
     de la palabra buscada.
     """
-    if varOption.get() == 1:
-        try:
-            palabraBuscada = (miBusqueda.get()).lower()
-            if palabraBuscada != "":
-                palabra_y_definicion = palabraBuscada + ". " + dicc_esp_qu[palabraBuscada.lower()]
-                resultado.delete(1.0, END)
-                resultado.insert(1.0, palabra_y_definicion)
-            else:
-                resultado.delete(1.0, END)
-                resultado.insert(1.0, "Por favor, escribe una palabra...")
-        except KeyError:
+    try:
+        palabraBuscada = (miBusqueda.get()).lower()
+        if palabraBuscada != "":
+            palabra_y_definicion = palabraBuscada + ". " + dicc_esp_qu[palabraBuscada.lower()]
             resultado.delete(1.0, END)
-            resultado.insert(1.0, "No hay resultado para la palabra que buscas. Por favor, asegurate de"
-                                  " no haber escrito con errores ortográficos...")
-    elif varOption.get() == 2:
-        try:
-            palabraBuscada = (miBusqueda.get()).lower()
-            if palabraBuscada != "":
-                palabra_y_definicion = palabraBuscada + ". " + dicc_qu_esp[palabraBuscada.lower()]
-                resultado.delete(1.0, END)
-                resultado.insert(1.0, palabra_y_definicion)
-            else:
-                resultado.delete(1.0, END)
-                resultado.insert(1.0, "Por favor, escribe una palabra...")
-        except KeyError:
+            resultado.insert(1.0, palabra_y_definicion)
+        else:
             resultado.delete(1.0, END)
-            resultado.insert(1.0, "No hay resultado para la palabra que buscas. Por favor, asegurate de "
-                                  "no haber escrito con errores ortográficos...")
-    else:
+            resultado.insert(1.0, "Por favor, escribe una palabra...")
+    except KeyError:
         resultado.delete(1.0, END)
-        resultado.insert(1.0, "Por favor, elige un diccionario.")
+        resultado.insert(1.0, "No hay resultado para la palabra que buscas. Por favor, asegurate de"
+                              " no haber escrito con errores ortográficos...")
 
 
 def avisoSalir():
@@ -56,7 +38,7 @@ def avisoSalir():
 
 def infoAdicional():
     messagebox.showinfo("Diccionario Español - Quechua",
-                        "Versión: 1.0"
+                        "Versión: 1.1"
                         "\nFecha: 12/03/2020"
                         "\nDesarrollador: MarkOut"
                         "\nCompatiblilidad: SO Windows"
@@ -122,20 +104,12 @@ frameTexto.grid(row=0, column=1)
 frameTexto.config(bg=color_fondo)
 
 titulo = Label(frameTexto, text="QhechuaDicc")
-titulo.grid(row=0, column=0, padx=5, pady=5, columnspan=2)
+titulo.grid(row=0, column=0, padx=5, pady=5)
 titulo.config(font=('bold', 20), bg=color_fondo)
-# img_portada = PhotoImage(file="llama2.ico")
-# frameChico = Frame(frameTitulo, img=img_portada)
-# frameChico.grid(row=0, column=1, padx=5, pady=5)
-# ---------------------------Botones para cambiar de diccionario-----------------------------
 
-varOption = IntVar()
-opcion_esp_qu = Radiobutton(frameTexto, text="Español - Quechua", variable=varOption, value=1)
-opcion_esp_qu.grid(row=1, column=0)
-opcion_esp_qu.config(bg=color_fondo)
-opcion_qu_esp = Radiobutton(frameTexto, text="Quechua - Español", variable=varOption, value=2)
-opcion_qu_esp.grid(row=1, column=1)
-opcion_qu_esp.config(bg=color_fondo)
+subtitulo = Label(frameTexto, text="Diccionario Español - Quechua")
+subtitulo.grid(row=1, column=0, padx=5, pady=5)
+subtitulo.config(bg=color_fondo)
 
 # ------------------------------Frame para el contenido-----------------------------------------
 
@@ -167,5 +141,6 @@ resultado = Text(frameContenido, width=40, height=12)
 resultado.grid(row=1, column=0, padx=10, pady=10, columnspan=5)
 resultado.config(bg=color_cuadro_texto, font="comic", wrap=WORD)  # wrap=WORD es para que haga los saltos de línea sin
 # cortar una palabra por la mitad
+resultado.insert(1.0, "Busca una palabra en Español...")
 
 raiz.mainloop()
