@@ -1,5 +1,6 @@
 from lista_palabras import dicc_esp_qu
 from tkinter import *
+from tkinter import filedialog, messagebox, Label
 import sqlite3
 
 
@@ -45,6 +46,30 @@ def buscarPalabra(event):
         resultado.insert(1.0, "Por favor, elige un diccionario.")
 
 
+def avisoSalir():
+
+    valor = messagebox.askokcancel("Salir de la aplicación",
+                                   "¿Deseas salir de la aplicación?")
+    if valor == True:
+        raiz.destroy()
+
+
+def infoAdicional():
+    messagebox.showinfo("Diccionario Español - Quechua",
+                        "Versión: 1.0"
+                        "\nFecha: 12/03/2020"
+                        "\nDesarrollador: MarkOut"
+                        "\nCompatiblilidad: SO Windows"
+                        )
+
+
+def infoLicencia():
+    messagebox.showinfo("Diccionario Español - Quechua",
+                        """GNU General Public License v3.0
+                        Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
+                        """
+                        )
+
 # -----------------------------------Variables-----------------------------------------------
 
 color_fondo = "#FFF6C7"
@@ -64,14 +89,12 @@ barraMenu = Menu(raiz)
 raiz.config(menu=barraMenu)
 
 archivoMenu = Menu(barraMenu, tearoff=0)
-archivoMenu.add_command(label="Imprimir")
-archivoMenu.add_command(label="Guardar")
-archivoMenu.add_command(label="Salir")
+archivoMenu.add_command(label="Salir", command=avisoSalir)
 herramientasMenu = Menu(barraMenu, tearoff=0)
 herramientasMenu.add_command(label="Buscar", command=lambda: buscarPalabra("parametro_de_relleno"))
 ayudaMenu = Menu(barraMenu, tearoff=0)
-ayudaMenu.add_command(label="Ayuda de Diccionario Quechua-Español")
-ayudaMenu.add_command(label="Licencia")
+ayudaMenu.add_command(label="Licencia", command=infoLicencia)
+ayudaMenu.add_command(label="Acerca de", command=infoAdicional)
 
 barraMenu.add_cascade(label="Archivo", menu=archivoMenu)
 barraMenu.add_cascade(label="Herramientas", menu=herramientasMenu)
