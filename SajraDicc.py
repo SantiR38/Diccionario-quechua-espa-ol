@@ -1,4 +1,4 @@
-from lista_palabras import *
+from lista_palabras import dicc_esp_qu
 from tkinter import *
 import sqlite3
 
@@ -53,10 +53,10 @@ color_cuadro_texto = "#E4CFB0"
 # ----------------------------------- Interfaz ----------------------------------------------
 
 raiz = Tk()
-raiz.title("SajraDicc")
+raiz.title("QhechuaDicc")
 raiz.iconbitmap("llama2.ico")
 raiz.config(bg=color_fondo)
-raiz.resizable(0,0)
+raiz.resizable(0, 0)
 
 # ----------------------------------Barra de Menú-----------------------------------------
 
@@ -67,11 +67,14 @@ archivoMenu = Menu(barraMenu, tearoff=0)
 archivoMenu.add_command(label="Imprimir")
 archivoMenu.add_command(label="Guardar")
 archivoMenu.add_command(label="Salir")
+herramientasMenu = Menu(barraMenu, tearoff=0)
+herramientasMenu.add_command(label="Buscar", command=lambda: buscarPalabra("parametro_de_relleno"))
 ayudaMenu = Menu(barraMenu, tearoff=0)
 ayudaMenu.add_command(label="Ayuda de Diccionario Quechua-Español")
 ayudaMenu.add_command(label="Licencia")
 
 barraMenu.add_cascade(label="Archivo", menu=archivoMenu)
+barraMenu.add_cascade(label="Herramientas", menu=herramientasMenu)
 barraMenu.add_cascade(label="Ayuda", menu=ayudaMenu)
 
 # ------------------------------Frame para el titulo-----------------------------------------
@@ -80,7 +83,7 @@ frameTitulo = Frame()
 frameTitulo.pack()
 frameTitulo.config(bg=color_fondo, width="850", height="350", bd=15)
 
-#Frame Imagen
+# Frame Imagen
 frameImagen = Frame(frameTitulo)
 frameImagen.grid(row=0, column=0, rowspan=2)
 frameImagen.config(bg=color_fondo)
@@ -90,13 +93,13 @@ vista_llamita = Label(frameImagen, image=llamita)
 vista_llamita.grid(row=0, column=0)
 vista_llamita.config(bg=color_fondo)
 
-#Frame Texto
+# Frame Texto
 frameTexto = Frame(frameTitulo)
 frameTexto.grid(row=0, column=1)
 frameTexto.config(bg=color_fondo)
 
-titulo = Label(frameTexto, text="SajraDicc")
-titulo.grid(row=0, column=0, padx=5, pady=5)
+titulo = Label(frameTexto, text="QhechuaDicc")
+titulo.grid(row=0, column=0, padx=5, pady=5, columnspan=2)
 titulo.config(font=('bold', 20), bg=color_fondo)
 # img_portada = PhotoImage(file="llama2.ico")
 # frameChico = Frame(frameTitulo, img=img_portada)
@@ -139,6 +142,7 @@ calcularBoton.config(bg=color_fondo, relief="flat")
 # -----------------Cuadro donde se muestra el resultado de la búsqueda---------------------
 resultado = Text(frameContenido, width=40, height=12)
 resultado.grid(row=1, column=0, padx=10, pady=10, columnspan=5)
-resultado.config(bg=color_cuadro_texto, font="comic", wrap=WORD) # wrap=WORD es para que haga los saltos de línea sin cortar una palabra por la mitad
+resultado.config(bg=color_cuadro_texto, font="comic", wrap=WORD)  # wrap=WORD es para que haga los saltos de línea sin
+# cortar una palabra por la mitad
 
 raiz.mainloop()
